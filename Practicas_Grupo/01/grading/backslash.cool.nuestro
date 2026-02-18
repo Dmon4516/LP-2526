@@ -1,10 +1,35 @@
 #name "backslash.cool"
-#1 STR_CONST "\0\1\2\\0\\1\\2\t\f\b\n\r\a\b\c\d\e\f\g"
-#3 STR_CONST "\"
-#3 OBJECTID this
-#3 OBJECTID is
-#3 OBJECTID still
-#3 OBJECTID inside
-#3 OBJECTID the
-#3 OBJECTID string
-#5 STR_CONST "I'm about to excape a newline \\n"
+ INT_CONST 0
+ INT_CONST 1
+ INT_CONST 2
+ INT_CONST 0
+ INT_CONST 1
+ INT_CONST 2
+ OBJECTID t
+ OBJECTID f
+ OBJECTID b
+ OBJECTID n
+ OBJECTID r
+ OBJECTID a
+ OBJECTID b
+ OBJECTID c
+ OBJECTID d
+ OBJECTID e
+ OBJECTID f
+ OBJECTID g
+ SPACE
+ OBJECTID this
+ OBJECTID is
+ OBJECTID still
+ OBJECTID inside
+ OBJECTID the
+ OBJECTID string
+ SPACE
+ OBJECTID m
+ OBJECTID about
+ OBJECTID to
+ OBJECTID excape
+ OBJECTID a
+ OBJECTID newline
+ SPACE
+ SPACE

@@ -1,4 +1,13 @@
 #name "comment_in_string.cl.cool"
-#1 STR_CONST "string (* 123 *) string"
-#2 STR_CONST "string \\n(* 123 *)"
-#4 STR_CONST "string (* \\n123 *)"
+ OBJECTID string
+ INT_CONST 123
+ OBJECTID string
+ SPACE
+ OBJECTID string
+ SPACE
+ INT_CONST 123
+ SPACE
+ OBJECTID string
+ SPACE
+ INT_CONST 123
+ SPACE

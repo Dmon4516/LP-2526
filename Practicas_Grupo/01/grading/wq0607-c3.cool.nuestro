@@ -1,10 +1,16 @@
 #name "wq0607-c3.cool"
-#3 STR_CONST "\\"
-#3 STR_CONST "\"
-#3 STR_CONST ""
-#3 STR_CONST ""
-#3 STR_CONST "\\"
-#3 STR_CONST "\\"
-#3 STR_CONST ""
-#3 STR_CONST "\"
-#3 STR_CONST "\"
+ OBJECTID sequence
+ OF
+ OBJECTID strings
+ OBJECTID and
+ OBJECTID escaped
+ OBJECTID quotes
+ OBJECTID and
+ OBJECTID errors
+ SPACE
+ STR_CONST ""
+ STR_CONST ""
+ STR_CONST ""
+ STR_CONST ""
+ STR_CONST ""
+ SPACE

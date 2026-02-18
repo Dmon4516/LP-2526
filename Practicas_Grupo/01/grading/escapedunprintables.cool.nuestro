@@ -1,6 +1,24 @@
 #name "escapedunprintables.cool"
-#1 STR_CONST "This is a tab:\\t"
-#2 STR_CONST "This is a backspace:\"
-#3 STR_CONST "This is a formfeed:\"
-#4 STR_CONST "This is a carriage return:"
-#5 STR_CONST "This is an escape:"
+ OBJECTID is
+ OBJECTID a
+ OBJECTID tab
+ SPACE
+ OBJECTID is
+ OBJECTID a
+ OBJECTID backspace
+ SPACE
+ OBJECTID is
+ OBJECTID a
+ OBJECTID formfeed
+ SPACE
+ SPACE
+ OBJECTID is
+ OBJECTID a
+ OBJECTID carriage
+ OBJECTID return
+ SPACE
+ SPACE
+ OBJECTID is
+ OBJECTID an
+ OBJECTID escape
+ SPACE

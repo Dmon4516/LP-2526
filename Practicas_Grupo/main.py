@@ -6,7 +6,7 @@ import sys
 #init()
 
 
-DIRECTORIO = os.path.expanduser("~/Repositorio/Docencia/Asignaturas/LP/Proyecto/")
+DIRECTORIO = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(DIRECTORIO)
 
 from Lexer import *

@@ -1,0 +1,30 @@
+#name "s04.test.cool"
+ OBJECTID various
+ OBJECTID forms
+ OF
+ OBJECTID whitespace
+ SPACE
+ INT_CONST 0
+ SPACE
+ OBJECTID blanks
+ SPACE
+ INT_CONST 1
+ SPACE
+ OBJECTID formfeed
+ SPACE
+ INT_CONST 2
+ SPACE
+ OBJECTID carriage
+ OBJECTID return
+ SPACE
+ INT_CONST 3
+ SPACE
+ OBJECTID tab
+ SPACE
+ INT_CONST 4
+ SPACE
+ OBJECTID vertical
+ OBJECTID tab
+ SPACE
+ INT_CONST 5
+ SPACE

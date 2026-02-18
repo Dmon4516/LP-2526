@@ -1,3 +1,9 @@
 #name "s19.test.cool"
-#2 OBJECTID c
-#3 OBJECTID d
+ OBJECTID illegal
+ OBJECTID unescaped
+ OBJECTID newline
+ SPACE
+ OBJECTID c
+ SPACE
+ OBJECTID d
+ SPACE

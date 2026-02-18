@@ -1,3 +1,14 @@
 #name "s32.test.cool"
-#2 '*' 
-#2 ')'
+ OBJECTID tricky
+ OBJECTID this
+ OBJECTID should
+ OBJECTID be
+ OBJECTID seen
+ OBJECTID as
+ OBJECTID an
+ OBJECTID error
+ NOT
+ OBJECTID two
+ OBJECTID tokens
+ SPACE
+ SPACE

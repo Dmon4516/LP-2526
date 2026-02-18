@@ -1,6 +1,622 @@
 #name "pathologicalstrings.cool"
-#5 STR_CONST "........10........20........30........40........50........60........70........80........90.......100\\n.......10........20........30........40........50........60........70........80........90.......200\\n.......10........20........30........40........50........60........70........80........90.......300\\n.......10........20........30........40........50........60........70........80........90.......400\\n.......10........20........30........40........50........60........70........80........90.......500\\n.......10........20........30........40........50........60........70........80........90.......600\\n.......10........20........30........40........50........60........70........80........90.......700\\n.......10........20........30........40........50........60........70........80........90.......800\\n.......10........20........30........40........50........60........70........80........90.......900\\n.......10........20........30........40........50........60........70........80........90......1000\\n.......10........20....."
-#18 STR_CONST "........10........20........30........40........50........60........70........80........90.......100\\n.......10........20........30........40........50........60........70........80........90.......200\\n.......10........20........30........40........50........60........70........80........90.......300\\n.......10........20........30........40........50........60........70........80........90.......400\\n.......10........20........30........40........50........60........70........80........90.......500\\n.......10........20........30........40........50........60........70........80........90.......600\\n.......10........20........30........40........50........60........70........80........90.......700\\n.......10........20........30........40........50........60........70........80........90.......800\\n.......10........20........30........40........50........60........70........80........90.......900\\n.......10........20........30........40........50........60........70........80........90......1000\\n.......10........20...\n"
-#31 STR_CONST "........10........20........30........40........50........60........70........80........90.......100\\n.......10........20........30........40........50........60........70........80........90.......200\\n.......10........20........30........40........50........60........70........80........90.......300\\n.......10........20........30........40........50........60........70........80........90.......400\\n.......10........20........30........40........50........60........70........80........90.......500\\n.......10........20........30........40........50........60........70........80........90.......600\\n.......10........20........30........40........50........60........70........80........90.......700\\n.......10........20........30........40........50........60........70........80........90.......800\\n.......10........20........30........40........50........60........70........80........90.......900\\n.......10........20........30........40........50........60........70........80........90......1000\\n.......10........20....\n"
-#44 STR_CONST "........10........20........30........40........50........60........70........80........90.......100\\n.......10........20........30........40........50........60........70........80........90.......200\\n.......10........20........30........40........50........60........70........80........90.......300\\n.......10........20........30........40........50........60........70........80........90.......400\\n.......10........20........30........40........50........60........70........80........90.......500\\n.......10........20........30........40........50........60........70........80........90.......600\\n.......10........20........30........40........50........60........70........80........90.......700\\n.......10........20........30........40........50........60........70........80........90.......800\\n.......10........20........30........40........50........60........70........80........90.......900\\n.......10........20........30........40........50........60........70........80........90......1000\\n.......10........20...\\n"
-#58 STR_CONST "........10........20........30........40........50........60........70........80........90.......100\\n.......10........20........30........40........50........60........70........80........90.......200\\n.......10........20........30........40........50........60........70........80........90.......300\\n.......10........20........30........40........50........60........70........80........90.......400\\n.......10........20........30........40........50........60........70........80........90.......500\\n.......10........20........30........40........50........60........70........80........90.......600\\n.......10........20........30........40........50........60........70........80........90.......700\\n.......10........20........30........40........50........60........70........80........90.......800\\n.......10........20........30........40........50........60........70........80........90.......900\\n.......10........20........30........40........50........60........70........80........90......1000\\n.......10........20....\\n"
+ OBJECTID some
+ OBJECTID pathological
+ OBJECTID str
+ OBJECTID length
+ OBJECTID cases
+ SPACE
+ OBJECTID illegal
+ OBJECTID contains
+ OBJECTID exactly
+ INT_CONST 1025
+ OBJECTID characters
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 100
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 200
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 300
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 400
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 500
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 600
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 700
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 800
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 900
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 1000
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ SPACE
+ OBJECTID legal
+ OBJECTID contains
+ OBJECTID exactly
+ INT_CONST 1024
+ OBJECTID characters
+ OBJECTID last
+ OBJECTID is
+ OBJECTID escape
+ OBJECTID seq
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 100
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 200
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 300
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 400
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 500
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 600
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 700
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 800
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 900
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 1000
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ OBJECTID n
+ SPACE
+ OBJECTID illegal
+ OBJECTID contains
+ OBJECTID exactly
+ INT_CONST 1025
+ OBJECTID characters
+ OBJECTID last
+ OBJECTID is
+ OBJECTID escape
+ OBJECTID seq
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 100
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 200
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 300
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 400
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 500
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 600
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 700
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 800
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 900
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 1000
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ OBJECTID n
+ SPACE
+ OBJECTID legal
+ OBJECTID contains
+ OBJECTID exactly
+ INT_CONST 1024
+ OBJECTID characters
+ OBJECTID last
+ OBJECTID is
+ OBJECTID escaped
+ OBJECTID newline
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 100
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 200
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 300
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 400
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 500
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 600
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 700
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 800
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 900
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 1000
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ SPACE
+ SPACE
+ OBJECTID illegal
+ OBJECTID contains
+ OBJECTID exactly
+ INT_CONST 1025
+ OBJECTID characters
+ OBJECTID last
+ OBJECTID is
+ OBJECTID escaped
+ OBJECTID newline
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 100
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 200
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 300
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 400
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 500
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 600
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 700
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 800
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 900
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ INT_CONST 30
+ INT_CONST 40
+ INT_CONST 50
+ INT_CONST 60
+ INT_CONST 70
+ INT_CONST 80
+ INT_CONST 90
+ INT_CONST 1000
+ SPACE
+ INT_CONST 10
+ INT_CONST 20
+ SPACE
+ SPACE

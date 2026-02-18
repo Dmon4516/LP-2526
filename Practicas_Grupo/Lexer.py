@@ -5,6 +5,15 @@ import os
 import re
 import sys
 
+from typing import TYPE_CHECKING, Callable, TypeVar
+
+if TYPE_CHECKING:
+    _F = TypeVar("_F", bound=Callable)
+
+    def _(*patterns: str) -> Callable[[_F], _F]:
+        def decorate(func: _F) -> _F:
+            return func
+        return decorate
 
 class Comentario(Lexer):
     tokens = {}
@@ -22,18 +31,68 @@ class Comentario(Lexer):
 
 
 class CoolLexer(Lexer):
-    tokens = {OBJECTID, INT_CONST, BOOL_CONST, TYPEID,
-              ELSE, IF, FI, THEN, NOT, IN, CASE, ESAC, CLASS,
-              INHERITS, ISVOID, LET, LOOP, NEW, OF,
-              POOL, THEN, WHILE, STR_CONST, LE, DARROW, ASSIGN}
+    tokens = {
+        'OBJECTID', 'INT_CONST', 'BOOL_CONST', 'TYPEID',
+        'ELSE', 'IF', 'FI', 'THEN', 'NOT', 'IN', 'CASE', 'ESAC', 'CLASS',
+        'INHERITS', 'ISVOID', 'LET', 'LOOP', 'NEW', 'OF',
+        'POOL', 'WHILE', 'STR_CONST', 'LE', 'DARROW', 'ASSIGN', 'SPACE'
+    }
     ignore = '\t '
-    literals = {'.'}
+    literals = {
+        '+', '-', '*', '/', '(', ')',
+        '<', '=', '.', ',', ';', ':',
+        '@', '{', '}', '~'
+        }
     ELSE = r'\b[eE][lL][sS][eE]\b'
-    STR_CONST = r'"[a-zA-Z0-9_/]*"'
+
+    @_(r'\b[t][r][u][e]\b|\b[f][a][l][s][e]\b')
+    def BOOL_CONST(self, t):
+        if t.value.lower() == 'true':
+            t.value = True
+        else:            
+            t.value = False
+        return t
     
     @_(r'\b[a-z][A-Z0-9_a-z]*\b')
     def OBJECTID(self, t):
+        palabras_reservadas = {'else', 'if', 'fi', 'then', 'not', 'in', 'case', 'esac', 'class', 'inherits', 'isvoid', 'let', 'loop', 'new', 'of', 'pool', 'while', 'true', 'false'}
+        if t.value.lower() in palabras_reservadas:
+            t.type = t.value.upper()
         return t
+    
+    @_(r'\b\d+\b')
+    def INT_CONST(self, t):
+        return t
+    
+    
+    @_(r'[<][=]')
+    def LE(self, t):
+        return t
+    
+    @_(r'[<][-]')
+    def ASSIGN(self, t):
+        return t
+    
+    @_(r'[=][>]')
+    def DARROW(self, t):
+        return t
+    
+    @_(r'\s+')
+    def SPACE(self, t):
+        return t
+
+    @_(r'\b[A-Z][A-Z0-9_a-z]*\b')
+    def STR_CONST(self, t):
+        if t.value == '\b':
+            t.value = '\\b'
+        if t.value == '\t':
+            t.value = '\\t'
+        if t.value == '\n':
+            t.value = '\\n'
+        if t.value == '\r':
+            t.value = '\\r'
+        return t
+
     @_(r'\n')
     def LINEBREAK(self, t):
         self.lineno += 1
@@ -52,7 +111,7 @@ class CoolLexer(Lexer):
     def TYPEID(self, t):
         return t
 
-    def error(self, t):
+    def error(self, t): #type: ignore[error]
         self.index += 1
     
     
