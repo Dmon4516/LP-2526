@@ -6,7 +6,7 @@ import sys
 #init()
 
 
-DIRECTORIO = os.path.dirname(os.path.abspath(__file__))
+DIRECTORIO = os.path.expanduser("./")
 sys.path.append(DIRECTORIO)
 
 from Lexer import *
@@ -42,18 +42,17 @@ if True:
             texto = f'#name "{fich}"\n' + texto
             resultado = g.read()
             g.close()
+            texto = re.sub(r'#\d+\b','',texto)
+            resultado = re.sub(r'#\d+\b','',resultado)
+            nuestro = [linea.strip() for linea in texto.split('\n') if linea.strip()]
+            bien = [linea.strip() for linea in resultado.split('\n') if linea.strip()]
+            texto = '\n'.join(nuestro)
+            resultado = '\n'.join(bien)
+            #print(texto)
+            #print(resultado)
             if texto.strip().split() != resultado.strip().split():
                 print(f"Revisa el fichero {fich}")
                 if DEBUG:
-                    texto = re.sub(r'#\d+\b','',texto)
-                    resultado = re.sub(r'#\d+\b','',resultado)
-                    nuestro = [linea for linea in texto.split('\n') if linea]
-                    bien = [linea for linea in resultado.split('\n') if linea]
-                    linea = 0
-                    while nuestro[linea:linea+NUMLINEAS] == bien[linea:linea+NUMLINEAS]:
-                        linea += 1
-                    #print(colored('\n'.join(nuestro[linea:linea+NUMLINEAS]), 'white', 'on_red'))
-                    #print(colored('\n'.join(bien[linea:linea+NUMLINEAS]), 'blue', 'on_green'))
                     f = open(os.path.join(DIR, fich)+'.nuestro', 'w')
                     g = open(os.path.join(DIR, fich)+'.bien', 'w')
                     f.write(texto.strip())

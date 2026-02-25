@@ -1,9 +1,0 @@
-#name "s19.test.cool"
- OBJECTID illegal
- OBJECTID unescaped
- OBJECTID newline
- SPACE
- OBJECTID c
- SPACE
- OBJECTID d
- SPACE
