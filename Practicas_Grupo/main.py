@@ -6,11 +6,10 @@ import sys
 #init()
 
 
-DIRECTORIO = os.path.expanduser("./")
+DIRECTORIO = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(DIRECTORIO)
 
 from Lexer import *
-#from Parser import *
 from Clases import *
 
 PRACTICA = "01" # Practica que hay que evaluar

@@ -1,374 +1,214 @@
 #name "book_list.cl.cool"
- OBJECTID example
- OF
- OBJECTID static
- OBJECTID and
- OBJECTID dynamic
- OBJECTID type
- OBJECTID differing
- OBJECTID for
- OBJECTID a
- OBJECTID dispatch
- SPACE
- INHERITS
- SPACE
- OBJECTID title
- SPACE
- OBJECTID author
- SPACE
- OBJECTID initBook
- OBJECTID title_p
- OBJECTID author_p
- SPACE
- SPACE
- OBJECTID title
- ASSIGN
- OBJECTID title_p
- SPACE
- OBJECTID author
- ASSIGN
- OBJECTID author_p
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID print
- SPACE
- SPACE
- OBJECTID out_string
- OBJECTID title
- OBJECTID out_string
- OBJECTID title
- OBJECTID out_string
- OBJECTID n
- SPACE
- OBJECTID out_string
- OBJECTID author
- OBJECTID out_string
- OBJECTID author
- OBJECTID out_string
- OBJECTID n
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- SPACE
- INHERITS
- SPACE
- OBJECTID per_title
- SPACE
- OBJECTID initArticle
- OBJECTID title_p
- OBJECTID author_p
- SPACE
- OBJECTID per_title_p
- SPACE
- SPACE
- OBJECTID initBook
- OBJECTID title_p
- OBJECTID author_p
- SPACE
- OBJECTID per_title
- ASSIGN
- OBJECTID per_title_p
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID print
- SPACE
- SPACE
- OBJECTID self
- OBJECTID print
- SPACE
- OBJECTID out_string
- OBJECTID periodical
- OBJECTID out_string
- OBJECTID per_title
- OBJECTID out_string
- OBJECTID n
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- SPACE
- INHERITS
- SPACE
- OBJECTID abort
- STR_CONST "returns"
- OBJECTID type
- OBJECTID we
- OBJECTID have
- OBJECTID to
- OBJECTID add
- SPACE
- OBJECTID an
- OBJECTID expression
- OF
- OBJECTID type
- OBJECTID here
- OBJECTID to
- OBJECTID satisfy
- OBJECTID the
- OBJECTID typechecker
- SPACE
- OBJECTID code
- OBJECTID is
- OBJECTID unreachable
- OBJECTID since
- OBJECTID abort
- OBJECTID halts
- OBJECTID the
- OBJECTID program
- SPACE
- SPACE
- OBJECTID isNil
- OBJECTID abort
- BOOL_CONST true
- SPACE
- OBJECTID cons
- OBJECTID hd
- SPACE
- LET
- OBJECTID new_cell
- ASSIGN
- NEW
- IN
- SPACE
- OBJECTID new_cell
- OBJECTID init
- OBJECTID hd
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID abort
- STR_CONST "returns"
- OBJECTID type
- OBJECTID we
- OBJECTID have
- OBJECTID to
- OBJECTID add
- SPACE
- OBJECTID an
- OBJECTID expression
- OF
- OBJECTID type
- OBJECTID here
- OBJECTID to
- OBJECTID satisfy
- OBJECTID the
- OBJECTID typechecker
- SPACE
- OBJECTID code
- OBJECTID is
- OBJECTID unreachable
- OBJECTID since
- OBJECTID abort
- OBJECTID halts
- OBJECTID the
- OBJECTID program
- SPACE
- SPACE
- OBJECTID car
- OBJECTID abort
- NEW
- SPACE
- OBJECTID abort
- STR_CONST "returns"
- OBJECTID type
- OBJECTID we
- OBJECTID have
- OBJECTID to
- OBJECTID add
- SPACE
- OBJECTID an
- OBJECTID expression
- OF
- OBJECTID type
- OBJECTID here
- OBJECTID to
- OBJECTID satisfy
- OBJECTID the
- OBJECTID typechecker
- SPACE
- OBJECTID code
- OBJECTID is
- OBJECTID unreachable
- OBJECTID since
- OBJECTID abort
- OBJECTID halts
- OBJECTID the
- OBJECTID program
- SPACE
- SPACE
- OBJECTID cdr
- OBJECTID abort
- NEW
- SPACE
- OBJECTID print_list
- OBJECTID abort
- SPACE
- SPACE
- INHERITS
- SPACE
- OBJECTID xcar
- OBJECTID keep
- OBJECTID the
- OBJECTID car
- OBJECTID and
- OBJECTID cdr
- IN
- OBJECTID attributes
- SPACE
- OBJECTID xcdr
- OBJECTID methods
- OBJECTID and
- OBJECTID features
- OBJECTID must
- OBJECTID have
- OBJECTID different
- OBJECTID names
- SPACE
- OBJECTID we
- OBJECTID use
- OBJECTID xcar
- OBJECTID and
- OBJECTID xcdr
- OBJECTID for
- OBJECTID the
- OBJECTID attributes
- OBJECTID and
- OBJECTID reserve
- SPACE
- OBJECTID car
- OBJECTID and
- OBJECTID cdr
- OBJECTID for
- OBJECTID the
- OBJECTID features
- SPACE
- OBJECTID isNil
- BOOL_CONST false
- SPACE
- OBJECTID init
- OBJECTID hd
- OBJECTID tl
- SPACE
- SPACE
- OBJECTID xcar
- ASSIGN
- OBJECTID hd
- SPACE
- OBJECTID xcdr
- ASSIGN
- OBJECTID tl
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID car
- OBJECTID xcar
- SPACE
- OBJECTID cdr
- OBJECTID xcdr
- SPACE
- OBJECTID print_list
- SPACE
- SPACE
- CASE
- OBJECTID xcar
- OBJECTID print
- OF
- SPACE
- OBJECTID dummy
- DARROW
- OBJECTID out_string
- OBJECTID dynamic
- OBJECTID type
- OBJECTID was
- OBJECTID n
- SPACE
- OBJECTID dummy
- DARROW
- OBJECTID out_string
- OBJECTID dynamic
- OBJECTID type
- OBJECTID was
- OBJECTID n
- SPACE
- ESAC
- SPACE
- OBJECTID xcdr
- OBJECTID print_list
- SPACE
- SPACE
- SPACE
- SPACE
- INHERITS
- SPACE
- OBJECTID isNil
- BOOL_CONST true
- SPACE
- OBJECTID print_list
- BOOL_CONST true
- SPACE
- SPACE
- SPACE
- OBJECTID books
- SPACE
- OBJECTID main
- SPACE
- LET
- OBJECTID a_book
- ASSIGN
- SPACE
- NEW
- OBJECTID initBook
- OBJECTID and
- SPACE
- OBJECTID and
- SPACE
- IN
- SPACE
- LET
- OBJECTID an_article
- ASSIGN
- SPACE
- NEW
- OBJECTID initArticle
- INT_CONST 100
- SPACE
- STR_CONST "Ulanoff"
- SPACE
- SPACE
- IN
- SPACE
- SPACE
- OBJECTID books
- ASSIGN
- NEW
- OBJECTID cons
- OBJECTID a_book
- OBJECTID cons
- OBJECTID an_article
- SPACE
- OBJECTID books
- OBJECTID print_list
- SPACE
- SPACE
- OBJECTID end
- LET
- OBJECTID an_article
- SPACE
- OBJECTID end
- LET
- OBJECTID a_book
- SPACE
- SPACE
- SPACE
+'-'
+'-'
+TYPEID example
+TYPEID of
+TYPEID static
+TYPEID and
+TYPEID dynamic
+TYPEID type
+TYPEID differing
+TYPEID for
+TYPEID a
+TYPEID dispatch
+SPACE
+TYPEID Class
+TYPEID Book
+TYPEID inherits
+TYPEID IO
+'{'
+SPACE
+TYPEID title
+':'
+TYPEID String
+';'
+SPACE
+TYPEID author
+':'
+TYPEID String
+';'
+SPACE
+TYPEID initBook
+'('
+TYPEID title_p
+':'
+TYPEID String
+','
+TYPEID author_p
+':'
+TYPEID String
+')'
+':'
+TYPEID Book
+'{'
+SPACE
+'{'
+SPACE
+TYPEID title
+ASSIGN
+TYPEID title_p
+';'
+SPACE
+TYPEID author
+ASSIGN
+TYPEID author_p
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+TYPEID print
+'('
+')'
+':'
+TYPEID Book
+'{'
+SPACE
+'{'
+SPACE
+TYPEID out_string
+'('
+')'
+'.'
+TYPEID out_string
+'('
+TYPEID title
+')'
+'.'
+TYPEID out_string
+'('
+')'
+';'
+SPACE
+TYPEID out_string
+'('
+')'
+'.'
+TYPEID out_string
+'('
+TYPEID author
+')'
+'.'
+TYPEID out_string
+'('
+')'
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+'}'
+';'
+SPACE
+TYPEID Class
+TYPEID Article
+TYPEID inherits
+TYPEID Book
+'{'
+SPACE
+TYPEID per_title
+':'
+TYPEID String
+';'
+SPACE
+TYPEID initArticle
+'('
+TYPEID title_p
+':'
+TYPEID String
+','
+TYPEID author_p
+':'
+TYPEID String
+','
+SPACE
+TYPEID per_title_p
+':'
+TYPEID String
+')'
+':'
+TYPEID Article
+'{'
+SPACE
+'{'
+SPACE
+TYPEID initBook
+'('
+TYPEID title_p
+','
+TYPEID author_p
+')'
+';'
+SPACE
+TYPEID per_title
+ASSIGN
+TYPEID per_title_p
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+TYPEID print
+'('
+')'
+':'
+TYPEID Book
+'{'
+SPACE
+'{'
+SPACE
+TYPEID self
+'@'
+TYPEID Book
+'.'
+TYPEID print
+'('
+')'
+';'
+SPACE
+TYPEID out_string
+'('
+')'
+'.'
+TYPEID out_string
+'('
+TYPEID per_title
+')'
+'.'
+TYPEID out_string
+'('
+')'
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+'}'
+';'
+SPACE
+TYPEID Class
+TYPEID BookList
+TYPEID inherits
+TYPEID IO
+'{'
+SPACE

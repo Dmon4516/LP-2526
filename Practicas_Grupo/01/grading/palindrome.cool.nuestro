@@ -1,95 +1,151 @@
 #name "palindrome.cool"
- CLASS
- INHERITS
- SPACE
- OBJECTID pal
- OBJECTID s
- SPACE
- IF
- OBJECTID s
- OBJECTID length
- INT_CONST 0
- SPACE
- THEN
- BOOL_CONST true
- SPACE
- ELSE
- IF
- OBJECTID s
- OBJECTID length
- INT_CONST 1
- SPACE
- THEN
- BOOL_CONST true
- SPACE
- ELSE
- IF
- OBJECTID s
- OBJECTID substr
- INT_CONST 0
- INT_CONST 1
- OBJECTID s
- OBJECTID substr
- OBJECTID s
- OBJECTID length
- INT_CONST 1
- INT_CONST 1
- SPACE
- THEN
- OBJECTID pal
- OBJECTID s
- OBJECTID substr
- INT_CONST 1
- OBJECTID s
- OBJECTID length
- INT_CONST 2
- SPACE
- ELSE
- BOOL_CONST false
- SPACE
- FI
- FI
- FI
- SPACE
- SPACE
- OBJECTID i
- SPACE
- OBJECTID main
- SPACE
- SPACE
- OBJECTID i
- ASSIGN
- INT_CONST 1
- SPACE
- OBJECTID out_string
- OBJECTID enter
- OBJECTID a
- OBJECTID string
- OBJECTID n
- SPACE
- IF
- OBJECTID pal
- OBJECTID in_string
- SPACE
- THEN
- OBJECTID out_string
- OBJECTID that
- OBJECTID was
- OBJECTID a
- OBJECTID palindrome
- OBJECTID n
- SPACE
- ELSE
- OBJECTID out_string
- OBJECTID that
- OBJECTID was
- NOT
- OBJECTID a
- OBJECTID palindrome
- OBJECTID n
- SPACE
- FI
- SPACE
- SPACE
- SPACE
- SPACE
+TYPEID class
+TYPEID Main
+TYPEID inherits
+TYPEID IO
+'{'
+SPACE
+TYPEID pal
+'('
+TYPEID s
+':'
+TYPEID String
+')'
+':'
+TYPEID Bool
+'{'
+SPACE
+TYPEID if
+TYPEID s
+'.'
+TYPEID length
+'('
+')'
+'='
+INT_CONST 0
+SPACE
+TYPEID then
+BOOL_CONST true
+SPACE
+ELSE
+TYPEID if
+TYPEID s
+'.'
+TYPEID length
+'('
+')'
+'='
+INT_CONST 1
+SPACE
+TYPEID then
+BOOL_CONST true
+SPACE
+ELSE
+TYPEID if
+TYPEID s
+'.'
+TYPEID substr
+'('
+INT_CONST 0
+','
+INT_CONST 1
+')'
+'='
+TYPEID s
+'.'
+TYPEID substr
+'('
+TYPEID s
+'.'
+TYPEID length
+'('
+')'
+'-'
+INT_CONST 1
+','
+INT_CONST 1
+')'
+SPACE
+TYPEID then
+TYPEID pal
+'('
+TYPEID s
+'.'
+TYPEID substr
+'('
+INT_CONST 1
+','
+TYPEID s
+'.'
+TYPEID length
+'('
+')'
+'-'
+INT_CONST 2
+')'
+')'
+SPACE
+ELSE
+BOOL_CONST false
+SPACE
+TYPEID fi
+TYPEID fi
+TYPEID fi
+SPACE
+'}'
+';'
+SPACE
+TYPEID i
+':'
+TYPEID Int
+';'
+SPACE
+TYPEID main
+'('
+')'
+':'
+TYPEID SELF_TYPE
+'{'
+SPACE
+'{'
+SPACE
+TYPEID i
+ASSIGN
+'~'
+INT_CONST 1
+';'
+SPACE
+TYPEID out_string
+'('
+')'
+';'
+SPACE
+TYPEID if
+TYPEID pal
+'('
+TYPEID in_string
+'('
+')'
+')'
+SPACE
+TYPEID then
+TYPEID out_string
+'('
+')'
+SPACE
+ELSE
+TYPEID out_string
+'('
+')'
+SPACE
+TYPEID fi
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+'}'
+';'
+SPACE

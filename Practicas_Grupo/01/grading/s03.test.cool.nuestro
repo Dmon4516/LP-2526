@@ -1,6 +1,9 @@
 #name "s03.test.cool"
- OBJECTID can
- OBJECTID they
- OBJECTID handle
- IN
- OBJECTID state
+'-'
+'-'
+TYPEID can
+TYPEID they
+TYPEID handle
+TYPEID EOF
+TYPEID in
+TYPEID state

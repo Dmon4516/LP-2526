@@ -1,177 +1,357 @@
 #name "new_complex.cool"
- CLASS
- INHERITS
- SPACE
- OBJECTID main
- SPACE
- LET
- OBJECTID c
- ASSIGN
- NEW
- OBJECTID init
- INT_CONST 1
- INT_CONST 1
- IN
- SPACE
- SPACE
- OBJECTID trivially
- OBJECTID equal
- OBJECTID see
- SPACE
- IF
- OBJECTID c
- OBJECTID reflect_X
- OBJECTID c
- OBJECTID reflect_0
- SPACE
- THEN
- OBJECTID out_string
- OBJECTID n
- SPACE
- ELSE
- OBJECTID out_string
- OBJECTID n
- SPACE
- FI
- SPACE
- OBJECTID equal
- SPACE
- IF
- OBJECTID c
- OBJECTID reflect_X
- OBJECTID reflect_Y
- OBJECTID equal
- OBJECTID c
- OBJECTID reflect_0
- SPACE
- THEN
- OBJECTID out_string
- OBJECTID n
- SPACE
- ELSE
- OBJECTID out_string
- OBJECTID n
- SPACE
- FI
- SPACE
- SPACE
- SPACE
- SPACE
- SPACE
- CLASS
- INHERITS
- SPACE
- OBJECTID x
- SPACE
- OBJECTID y
- SPACE
- OBJECTID init
- OBJECTID a
- OBJECTID b
- SPACE
- SPACE
- OBJECTID x
- OBJECTID a
- SPACE
- OBJECTID y
- OBJECTID b
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID print
- SPACE
- IF
- OBJECTID y
- INT_CONST 0
- SPACE
- THEN
- OBJECTID out_int
- OBJECTID x
- SPACE
- ELSE
- OBJECTID out_int
- OBJECTID x
- OBJECTID out_string
- OBJECTID out_int
- OBJECTID y
- OBJECTID out_string
- STR_CONST "I"
- SPACE
- FI
- SPACE
- SPACE
- OBJECTID reflect_0
- SPACE
- SPACE
- OBJECTID x
- OBJECTID x
- SPACE
- OBJECTID y
- OBJECTID y
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID reflect_X
- SPACE
- SPACE
- OBJECTID y
- OBJECTID y
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID reflect_Y
- SPACE
- SPACE
- OBJECTID x
- OBJECTID x
- SPACE
- OBJECTID self
- SPACE
- SPACE
- SPACE
- OBJECTID equal
- OBJECTID d
- SPACE
- IF
- OBJECTID x
- OBJECTID d
- OBJECTID x_value
- SPACE
- THEN
- SPACE
- IF
- OBJECTID y
- OBJECTID d
- OBJECTID y_value
- SPACE
- THEN
- BOOL_CONST true
- SPACE
- ELSE
- BOOL_CONST false
- SPACE
- FI
- SPACE
- ELSE
- BOOL_CONST false
- SPACE
- FI
- SPACE
- SPACE
- OBJECTID x_value
- SPACE
- OBJECTID x
- SPACE
- SPACE
- OBJECTID y_value
- SPACE
- OBJECTID y
- SPACE
- SPACE
- SPACE
+TYPEID class
+TYPEID Main
+TYPEID inherits
+TYPEID IO
+'{'
+SPACE
+TYPEID main
+'('
+')'
+':'
+TYPEID SELF_TYPE
+'{'
+SPACE
+'('
+TYPEID let
+TYPEID c
+':'
+TYPEID Complex
+ASSIGN
+'('
+TYPEID new
+TYPEID Complex
+')'
+'.'
+TYPEID init
+'('
+INT_CONST 1
+','
+INT_CONST 1
+')'
+TYPEID in
+SPACE
+'{'
+SPACE
+'-'
+'-'
+TYPEID trivially
+TYPEID equal
+'('
+TYPEID see
+TYPEID CoolAid
+')'
+SPACE
+TYPEID if
+TYPEID c
+'.'
+TYPEID reflect_X
+'('
+')'
+'='
+TYPEID c
+'.'
+TYPEID reflect_0
+'('
+')'
+SPACE
+TYPEID then
+TYPEID out_string
+'('
+')'
+SPACE
+ELSE
+TYPEID out_string
+'('
+')'
+SPACE
+TYPEID fi
+';'
+SPACE
+'-'
+'-'
+TYPEID equal
+SPACE
+TYPEID if
+TYPEID c
+'.'
+TYPEID reflect_X
+'('
+')'
+'.'
+TYPEID reflect_Y
+'('
+')'
+'.'
+TYPEID equal
+'('
+TYPEID c
+'.'
+TYPEID reflect_0
+'('
+')'
+')'
+SPACE
+TYPEID then
+TYPEID out_string
+'('
+')'
+SPACE
+ELSE
+TYPEID out_string
+'('
+')'
+SPACE
+TYPEID fi
+';'
+SPACE
+'}'
+SPACE
+')'
+SPACE
+'}'
+';'
+SPACE
+'}'
+';'
+SPACE
+TYPEID class
+TYPEID Complex
+TYPEID inherits
+TYPEID IO
+'{'
+SPACE
+TYPEID x
+':'
+TYPEID Int
+';'
+SPACE
+TYPEID y
+':'
+TYPEID Int
+';'
+SPACE
+TYPEID init
+'('
+TYPEID a
+':'
+TYPEID Int
+','
+TYPEID b
+':'
+TYPEID Int
+')'
+':'
+TYPEID Complex
+'{'
+SPACE
+'{'
+SPACE
+TYPEID x
+'='
+TYPEID a
+';'
+SPACE
+TYPEID y
+'='
+TYPEID b
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+TYPEID print
+'('
+')'
+':'
+TYPEID Object
+'{'
+SPACE
+TYPEID if
+TYPEID y
+'='
+INT_CONST 0
+SPACE
+TYPEID then
+TYPEID out_int
+'('
+TYPEID x
+')'
+SPACE
+ELSE
+TYPEID out_int
+'('
+TYPEID x
+')'
+'.'
+TYPEID out_string
+'('
+')'
+'.'
+TYPEID out_int
+'('
+TYPEID y
+')'
+'.'
+TYPEID out_string
+'('
+')'
+SPACE
+TYPEID fi
+SPACE
+'}'
+';'
+SPACE
+TYPEID reflect_0
+'('
+')'
+':'
+TYPEID Complex
+'{'
+SPACE
+'{'
+SPACE
+TYPEID x
+'='
+'~'
+TYPEID x
+';'
+SPACE
+TYPEID y
+'='
+'~'
+TYPEID y
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+TYPEID reflect_X
+'('
+')'
+':'
+TYPEID Complex
+'{'
+SPACE
+'{'
+SPACE
+TYPEID y
+'='
+'~'
+TYPEID y
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+TYPEID reflect_Y
+'('
+')'
+':'
+TYPEID Complex
+'{'
+SPACE
+'{'
+SPACE
+TYPEID x
+'='
+'~'
+TYPEID x
+';'
+SPACE
+TYPEID self
+';'
+SPACE
+'}'
+SPACE
+'}'
+';'
+SPACE
+TYPEID equal
+'('
+TYPEID d
+':'
+TYPEID Complex
+')'
+':'
+TYPEID Bool
+'{'
+SPACE
+TYPEID if
+TYPEID x
+'='
+TYPEID d
+'.'
+TYPEID x_value
+'('
+')'
+SPACE
+TYPEID then
+SPACE
+TYPEID if
+TYPEID y
+'='
+TYPEID d
+'.'
+TYPEID y_value
+'('
+')'
+SPACE
+TYPEID then
+BOOL_CONST true
+SPACE
+ELSE
+BOOL_CONST false
+SPACE
+TYPEID fi
+SPACE
+ELSE
+BOOL_CONST false
+SPACE
+TYPEID fi
+SPACE
+'}'
+';'
+SPACE
+TYPEID x_value
+'('
+')'
+':'
+TYPEID Int
+'{'
+SPACE
+TYPEID x
+SPACE
+'}'
+';'
+SPACE
+TYPEID y_value
+'('
+')'
+':'
+TYPEID Int
+'{'
+SPACE
+TYPEID y
+SPACE
+'}'
+';'
+SPACE
+'}'
+';'
+SPACE

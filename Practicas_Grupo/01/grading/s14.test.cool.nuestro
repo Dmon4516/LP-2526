@@ -1,6 +1,2 @@
 #name "s14.test.cool"
- OBJECTID token
- OBJECTID cmt
- OBJECTID token2
- OBJECTID cmt2
- SPACE
+TYPEID token

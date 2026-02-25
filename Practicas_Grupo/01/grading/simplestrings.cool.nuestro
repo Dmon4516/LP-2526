@@ -1,26 +1,5 @@
 #name "simplestrings.cool"
- OBJECTID this
- OBJECTID is
- OBJECTID a
- OBJECTID string
- OBJECTID so
- OBJECTID is
- OBJECTID this
- SPACE
- OBJECTID one
- OBJECTID more
- OBJECTID string
- SPACE
- OBJECTID strings
- OBJECTID can
- OBJECTID have
- OBJECTID keywords
- OBJECTID inside
- IF
- ELSE
- CASE
- SPACE
- INT_CONST 1234567890
- OBJECTID justanother
- OBJECTID string
- SPACE
+SPACE
+SPACE
+SPACE
+SPACE

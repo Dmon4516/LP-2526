@@ -1,26 +1,10 @@
 #name "stringcomment.cool"
- OBJECTID is
- OBJECTID a
- OBJECTID string
- OBJECTID and
- OBJECTID it
- OBJECTID s
- OBJECTID still
- OBJECTID a
- OBJECTID string
- SPACE
- OBJECTID is
- OBJECTID a
- OBJECTID comment
- NOT
- OBJECTID a
- OBJECTID string
- SPACE
- NOT
- OBJECTID a
- OBJECTID string
- SPACE
- NOT
- OBJECTID a
- OBJECTID comment
- SPACE
+SPACE
+'-'
+'-'
+TYPEID This
+TYPEID is
+TYPEID a
+TYPEID comment
+','
+SPACE

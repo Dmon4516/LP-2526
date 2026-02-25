@@ -38,11 +38,20 @@ class CoolLexer(Lexer):
         'POOL', 'WHILE', 'STR_CONST', 'LE', 'DARROW', 'ASSIGN', 'SPACE'
     }
     ignore = '\t '
+
     literals = {
         '+', '-', '*', '/', '(', ')',
         '<', '=', '.', ',', ';', ':',
-        '@', '{', '}', '~'
-        }
+        '@', '{', '}', '~',
+    }
+
+    string_escapes = {
+        '\\b', '\b',
+        '\\t', '\t',
+        '\\n', '\n',
+        '\\r', '\r',
+    }
+
     ELSE = r'\b[eE][lL][sS][eE]\b'
 
     @_(r'\b[t][r][u][e]\b|\b[f][a][l][s][e]\b')
@@ -53,7 +62,7 @@ class CoolLexer(Lexer):
             t.value = False
         return t
     
-    @_(r'\b[a-z][A-Z0-9_a-z]*\b')
+    @_(r'"[a-z][A-Z0-9_a-z]*"')
     def OBJECTID(self, t):
         palabras_reservadas = {'else', 'if', 'fi', 'then', 'not', 'in', 'case', 'esac', 'class', 'inherits', 'isvoid', 'let', 'loop', 'new', 'of', 'pool', 'while', 'true', 'false'}
         if t.value.lower() in palabras_reservadas:
@@ -63,7 +72,6 @@ class CoolLexer(Lexer):
     @_(r'\b\d+\b')
     def INT_CONST(self, t):
         return t
-    
     
     @_(r'[<][=]')
     def LE(self, t):
@@ -80,50 +88,37 @@ class CoolLexer(Lexer):
     @_(r'\s+')
     def SPACE(self, t):
         return t
-
-    @_(r'\b[A-Z][A-Z0-9_a-z]*\b')
-    def STR_CONST(self, t):
-        if t.value == '\b':
-            t.value = '\\b'
-        if t.value == '\t':
-            t.value = '\\t'
-        if t.value == '\n':
-            t.value = '\\n'
-        if t.value == '\r':
-            t.value = '\\r'
+    
+    @_(r'\w+')
+    def TYPEID(self, t):
         return t
-
+    
     @_(r'\n')
     def LINEBREAK(self, t):
         self.lineno += 1
     
     @_(r'\b[wW][hH][iI][lL][eE]\b')
     def WHILE(self, t):
-        t.value = (t.value) + 'dddd'
         return t
-    @_(r'.')
-    def ERROR(self, t):
-        print(t)
-        if t.value in self.literals:
-            t.type = t.value
     
-    @_(r'\w+')
-    def TYPEID(self, t):
-        return t
 
-    def error(self, t): #type: ignore[error]
-        self.index += 1
+    @_(r'"([^"\\]|\\.)*"')
+    def STR_CONST(self, t):
+        if t.value == self.string_escapes:
+            return t
     
     
-    CARACTERES_CONTROL = [bytes.fromhex(i+hex(j)[-1]).decode('ascii')
-                          for i in ['0', '1']
-                          for j in range(16)] + [bytes.fromhex(hex(127)[-2:]).decode("ascii")]
-    @_(r'\(\*')
-    def IR(self, t):
-        self.begin(Comentario)
 
     def error(self, t):
         self.index += 1
+
+    CARACTERES_CONTROL = [bytes.fromhex(i+hex(j)[-1]).decode('ascii')
+                          for i in ['0', '1']
+                          for j in range(16)] + [bytes.fromhex(hex(127)[-2:]).decode("ascii")]
+
+    @_(r'\(\*')
+    def IR(self, t):
+        self.begin(Comentario)
         
     def salida(self, texto):
         lexer = CoolLexer()
