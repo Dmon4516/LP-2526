@@ -17,25 +17,24 @@ if TYPE_CHECKING:
 
 class Comentario(Lexer):
     tokens = {}
-    # TODO: Implementar contador de nesting para comentarios anidados
-    # nested = 1  # iniciar en 1 cuando se entra a Comentario
-    nested = 0  # iniciar en 0, incrementar al entrar a Comentario, decrementar al salir
-    ignore = ''
-    
-    @_(r'.')
-    def PASAR(self, t):
-        pass
+    nested = 1
+    @_(r'\(\*')
+    def ABRIR(self, t):
+        self.nested += 1
+
+    @_(r'\*\)')
+    def VOLVER(self, t):
+        self.nested -= 1
+        if self.nested == 0:
+            self.begin(CoolLexer)
+
     @_(r'\n')
     def LINEA(self, t):
         self.lineno += 1
-    @_(r'\*\)')
-    def VOLVER(self, t):
-        if self.nested == 1:
-            self.begin(CoolLexer)
-        else:
-            self.nested -= 1
 
-
+    @_(r'.')
+    def PASAR(self, t):
+        pass
 
 
 class CoolLexer(Lexer):
@@ -46,6 +45,12 @@ class CoolLexer(Lexer):
         'POOL', 'WHILE', 'STR_CONST', 'LE', 'DARROW', 'ASSIGN', 'SPACE'
     }
     ignore = '\t '
+
+    palabras_reservadas = {
+        'else', 'if', 'fi', 'then', 'not', 'in', 'case', 'esac', 'class',
+        'inherits', 'isvoid', 'let', 'loop', 'new', 'of', 'pool', 'while',
+        'true', 'false'
+    }
 
     @_(r'--.*')
     def COMMENT(self, t):
@@ -63,7 +68,7 @@ class CoolLexer(Lexer):
     def DARROW(self, t):
         return t
     
-    @_(r'\b[t][r][u][e]\b|\b[f][a][l][s][e]\b')
+    @_(r'[t][r][u][e]|[f][a][l][s][e]')
     def BOOL_CONST(self, t):
         if t.value == 'true':
             t.value = True
@@ -78,28 +83,21 @@ class CoolLexer(Lexer):
     }
 
     string_escapes = {
-        '\\b', '\b',
-        '\\t', '\t',
-        '\\n', '\n',
-        '\\r', '\r',
+        '\\b': '\b',
+        '\\t': '\t',
+        '\\n': '\n',
+        '\\r': '\r',
     }
 
     
     @_(r'[a-z][A-Z0-9_a-z]*')
     def OBJECTID(self, t):
-        palabras_reservadas = {'else', 'if', 'fi', 'then', 'not', 'in', 'case', 'esac', 'class', 'inherits', 'isvoid', 'let', 'loop', 'new', 'of', 'pool', 'while', 'true', 'false'}
-        if t.value.lower() in palabras_reservadas:
+        if t.value.lower() in self.palabras_reservadas:
             t.type = t.value.upper()
-            # TODO: Verificar si verdadero es solo si la forma es 'true' o 'false' en minúscula
-            # Si es 'TRUE' o 'FALSE' debe ser TYPEID, no BOOL_CONST
         return t
     
     @_(r'\b\d+\b')
     def INT_CONST(self, t):
-        return t
-    
-    @_(r'\s+')
-    def SPACE(self, t):
         return t
     
     @_(r'\b[A-Z][A-Za-z0-9_]*\b')
@@ -112,14 +110,25 @@ class CoolLexer(Lexer):
     
     @_(r'"([^"\\]|\\.)*"')
     def STR_CONST(self, t):
-        # TODO: Procesar escapes: \\b -> \b, \\t -> \t, \\n -> \n, \\r -> \r
-        # TODO: Validar longitud máxima 1024 caracteres
-        # TODO: Rechazar si contiene: \0, EOF, o saltos de línea sin escape
-        # TODO: Quitar las comillas del valor final
-        if t.value == self.string_escapes:
+
+        valor = t.value[1:-1]  # quitar las comillas
+        
+        if '\n' in valor or '\0' in valor:
+            t.type = 'ERROR'
+            t.value = 'Invalid string constant'
             return t
-    
-    
+        
+        # Reemplazar escapes
+        for escape, char in self.string_escapes.items():
+            valor = valor.replace(escape, char)
+
+        if len(valor) > 1024:
+            t.type = 'ERROR'
+            t.value = 'String constant too long'
+        else:
+            t.value = valor
+
+        return t
 
     def error(self, t):
         t.type = 'ERROR'
@@ -135,7 +144,6 @@ class CoolLexer(Lexer):
     # @_(r'\(\*[^\\]\)')
     @_(r'\(\*')
     def IR(self, t):
-        # Iniciar estado de comentario anidado
         self.begin(Comentario)
         
     def salida(self, texto):
@@ -145,14 +153,14 @@ class CoolLexer(Lexer):
         list_strings = []
         for token in lexer.tokenize(texto):
             result = f'#{token.lineno} {token.type} '
-            if token.type == 'OBJECTID':
-                result += f"{token.value}"
-            elif token.type == 'BOOL_CONST':
+            if token.type == 'BOOL_CONST':
                 result += "true" if token.value else "false"
+            elif token.type == 'OBJECTID':
+                result += f"{token.value}"
             elif token.type == 'TYPEID':
                 result += f"{str(token.value)}"
             elif token.type in self.literals:
-                result = f'#{token.lineno} \'{token.type}\' '
+                result = f'#{token.lineno} \'{token.type}\''
             elif token.type == 'STR_CONST':
                 result += token.value
             elif token.type == 'INT_CONST':

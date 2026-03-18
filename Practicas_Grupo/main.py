@@ -11,9 +11,9 @@ sys.path.append(DIRECTORIO)
 
 from Lexer import *
 from Clases import *
-from Parser import *
+# Parser builds its grammar at import time; only import it when needed (práctica 02/03)
 
-PRACTICA = "02" # Practica que hay que evaluar
+PRACTICA = "01" # Practica que hay que evaluar
 DEBUG = True   # Decir si se lanzan mensajes de debug
 NUMLINEAS = 3   # Numero de lineas que se muestran antes y después de la no coincidencia
 sys.path.append(DIRECTORIO)
@@ -60,6 +60,9 @@ if True:
                     f.close()
                     g.close()
         elif PRACTICA in ('02', '03'):
+            # Import parser lazily (avoids building the grammar for práctica 01)
+            from Parser import CoolParser
+
             parser = CoolParser()
             parser.nombre_fichero = fich
             parser.errores = []
