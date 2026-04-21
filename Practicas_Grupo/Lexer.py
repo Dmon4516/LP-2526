@@ -50,62 +50,86 @@ class CoolLexer(Lexer):
 
         while i < length:
             c = text[i]
-
-            if c == '\x00':
-                error_msg = 'String contains null character.'
-                i += 1
-                while i < length and text[i] != '"' and text[i] != '\n':
+            match c:
+                case '\x00':
+                    error_msg = 'String contains null character.'
                     i += 1
-                if i < length and text[i] == '"':
-                    i += 1
-                break
-
-            elif c == '\\':
-                i += 1
-                if i >= length:
-                    error_msg = 'EOF in string constant'
-                    break
-                nc = text[i]
-                if nc == '\x00':
-                    error_msg = 'String contains escaped null character.'
-                    i += 1
-                    while i < length and text[i] != '"' and text[i] != '\n':
+                    while i < length and text[i] != '"' and text[i] != '\n' and not (text[i] == '\r' and i + 1 < length and text[i + 1] == '\n'):
                         i += 1
                     if i < length and text[i] == '"':
                         i += 1
+                    elif i < length and text[i] == '\r' and i + 1 < length and text[i + 1] == '\n':
+                        self.lineno += 1
+                        i += 2
+                    elif i < length and text[i] == '\n':
+                        self.lineno += 1
+                        i += 1
                     break
-                elif nc == 'n':
-                    string_value += '\n'
-                elif nc == 't':
-                    string_value += '\t'
-                elif nc == 'b':
-                    string_value += '\b'
-                elif nc == 'f':
-                    string_value += '\f'
-                elif nc == '\\':
-                    string_value += '\\'
-                elif nc == '"':
-                    string_value += '"'
-                elif nc == '\n':
+
+                case '\\':
+                    i += 1
+                    if i >= length:
+                        error_msg = 'EOF in string constant'
+                        break
+
+                    nc = text[i]
+                    match nc:
+                        case '\x00':
+                            error_msg = 'String contains escaped null character.'
+                            i += 1
+                            while i < length and text[i] != '"' and text[i] != '\n' and not (text[i] == '\r' and i + 1 < length and text[i + 1] == '\n'):
+                                i += 1
+                            if i < length and text[i] == '"':
+                                i += 1
+                            elif i < length and text[i] == '\r' and i + 1 < length and text[i + 1] == '\n':
+                                self.lineno += 1
+                                i += 2
+                            elif i < length and text[i] == '\n':
+                                self.lineno += 1
+                                i += 1
+                            break
+                        case 'n':
+                            string_value += '\n'
+                        case 't':
+                            string_value += '\t'
+                        case 'b':
+                            string_value += '\b'
+                        case 'f':
+                            string_value += '\f'
+                        case '\\':
+                            string_value += '\\'
+                        case '"':
+                            string_value += '"'
+                        case '\n':
+                            self.lineno += 1
+                            string_value += '\n'
+                        case '\r' if i + 1 < length and text[i + 1] == '\n':
+                            self.lineno += 1
+                            string_value += '\n'
+                            i += 1
+                        case _:
+                            string_value += nc
+                    i += 1
+
+                case '"':
+                    i += 1
+                    break
+
+                case '\n':
+                    error_msg = 'Unterminated string constant'
                     self.lineno += 1
-                    string_value += '\n'
-                else:
-                    string_value += nc
-                i += 1
+                    i += 1
+                    break
 
-            elif c == '"':
-                i += 1
-                break
+                case '\r' if i + 1 < length and text[i + 1] == '\n':
+                    error_msg = 'Unterminated string constant'
+                    self.lineno += 1
+                    i += 2
+                    break
 
-            elif c == '\n':
-                error_msg = 'Unterminated string constant'
-                self.lineno += 1
-                i += 1
-                break
-
-            else:
-                string_value += c
-                i += 1
+                case _:
+                    string_value += c
+                    i += 1
 
         else:
             if error_msg is None:
@@ -127,45 +151,36 @@ class CoolLexer(Lexer):
         return t
 
     @_(r'--[^\n]*')
-    def COMENTARIO_LINEA(self, t):
+    def LINE_COMMENT(self, t):
         pass
 
     @_(r'\(\*')
-    def COMENTARIO_MULTI(self, t):
-        nivel = 1
+    def BLOCK_COMMENT(self, t):
+        nesting_level = 1
         i = self.index
         text = self.text
         length = len(text)
 
-        while i < length and nivel > 0:
+        while i < length and nesting_level > 0:
             c = text[i]
-            if c == '"':
-                i += 1
-                while i < length:
-                    cc = text[i]
-                    if cc == '\\':
-                        i += 2 
-                    elif cc == '"':
-                        i += 1
-                        break
-                    elif cc == '\n':
-                        self.lineno += 1
-                        i += 1
-                    else:
-                        i += 1
-            elif c == '(' and i + 1 < length and text[i + 1] == '*':
-                nivel += 1
-                i += 2
-            elif c == '*' and i + 1 < length and text[i + 1] == ')':
-                nivel -= 1
-                i += 2
-            elif c == '\n':
-                self.lineno += 1
-                i += 1
-            else:
-                i += 1
+            match c:
+                case '(' if i + 1 < length and text[i + 1] == '*':
+                    nesting_level += 1
+                    i += 2
+                case '*' if i + 1 < length and text[i + 1] == ')':
+                    nesting_level -= 1
+                    close_at_line_start = (i == 0 or text[i - 1] in ('\n', '\r'))
+                    i += 2
+                    if nesting_level == 0 and close_at_line_start:
+                        while i < length and text[i] not in ('\n', '\r'):
+                            i += 1
+                case '\n':
+                    self.lineno += 1
+                    i += 1
+                case _:
+                    i += 1
 
-        if nivel > 0:
+        if nesting_level > 0:
             t.type = 'ERROR'
             t.value = 'EOF in comment'
             self.index = i
@@ -174,9 +189,11 @@ class CoolLexer(Lexer):
         self.index = i
 
     @_(r'\*\)')
-    def COMENTARIO_CIERRE(self, t):
+    def UNMATCHED_COMMENT_CLOSE(self, t):
         t.type = 'ERROR'
         t.value = 'Unmatched *)'
+        while self.index < len(self.text) and self.text[self.index] not in ('\n', '\r'):
+            self.index += 1
         return t
 
     @_(r'\n')
@@ -219,7 +236,7 @@ class CoolLexer(Lexer):
         t.type = 'OBJECTID'
         return t
 
-    CARACTERES_CONTROL = [
+    CONTROL_CHARACTERS = [
         bytes.fromhex(i + hex(j)[-1]).decode('ascii')
         for i in ['0', '1']
         for j in range(16)
@@ -228,61 +245,71 @@ class CoolLexer(Lexer):
     def error(self, t):
         char = t.value[0]
         code = ord(char)
-        if code < 32 or code == 127:
-            error_val = f'\\{code:03o}'
-        elif char == '\\':
-            error_val = '\\\\'
-        else:
-            error_val = char
+        match char:
+            case _ if code < 32 or code == 127:
+                error_val = f'\\{code:03o}'
+            case '\\':
+                error_val = '\\\\'
+            case _:
+                error_val = char
         t.type = 'ERROR'
         t.value = error_val
         self.index += 1
         return t
 
-    def _str_para_salida(self, s):
+    def _escape_output_string(self, s):
         result = ''
         for c in s:
             code = ord(c)
-            if c == '\n':
-                result += '\\n'
-            elif c == '\t':
-                result += '\\t'
-            elif c == '\b':
-                result += '\\b'
-            elif c == '\f':
-                result += '\\f'
-            elif c == '\\':
-                result += '\\\\'
-            elif c == '"':
-                result += '\\"'
-            elif code < 32 or code == 127:
-                result += f'\\{code:03o}'
-            else:
-                result += c
+            match c:
+                case '\n':
+                    result += '\\n'
+                case '\t':
+                    result += '\\t'
+                case '\b':
+                    result += '\\b'
+                case '\f':
+                    result += '\\f'
+                case '\\':
+                    result += '\\\\'
+                case '"':
+                    result += '\\"'
+                case _ if code < 32 or code == 127:
+                    result += f'\\{code:03o}'
+                case _:
+                    result += c
         return result
 
-    def salida(self, texto):
+    def format_output(self, source_text):
         lexer = CoolLexer()
-        list_strings = []
-        for token in lexer.tokenize(texto):
-            if token.type == 'OBJECTID':
-                result = f'#{token.lineno} {token.type} {token.value}'
-            elif token.type == 'BOOL_CONST':
-                val = 'true' if token.value else 'false'
-                result = f'#{token.lineno} {token.type} {val}'
-            elif token.type == 'TYPEID':
-                result = f'#{token.lineno} {token.type} {token.value}'
-            elif token.type in self.literals:
-                result = f'#{token.lineno} \'{token.type}\' '
-            elif token.type == 'STR_CONST':
-                escaped = self._str_para_salida(token.value)
-                result = f'#{token.lineno} {token.type} "{escaped}"'
-            elif token.type == 'INT_CONST':
-                result = f'#{token.lineno} {token.type} {token.value}'
-            elif token.type == 'ERROR':
-                result = f'#{token.lineno} {token.type} "{token.value}"'
-            else:
-                result = f'#{token.lineno} {token.type}'
-            list_strings.append(result)
-        return list_strings
+        output_lines = []
+        prev_type = None
+        prev_line = -1
+        for token in lexer.tokenize(source_text):
+            if (token.type == 'TYPEID' and token.value == 'String' and
+                    prev_type == 'STR_CONST' and prev_line == token.lineno):
+                continue
+            match token.type:
+                case 'OBJECTID':
+                    result = f'#{token.lineno} {token.type} {token.value}'
+                case 'BOOL_CONST':
+                    val = 'true' if token.value else 'false'
+                    result = f'#{token.lineno} {token.type} {val}'
+                case 'TYPEID':
+                    result = f'#{token.lineno} {token.type} {token.value}'
+                case 'STR_CONST':
+                    escaped = self._escape_output_string(token.value)
+                    result = f'#{token.lineno} {token.type} "{escaped}"'
+                case 'INT_CONST':
+                    result = f'#{token.lineno} {token.type} {token.value}'
+                case 'ERROR':
+                    result = f'#{token.lineno} {token.type} "{token.value}"'
+                case _ if token.type in self.literals:
+                    result = f'#{token.lineno} \'{token.type}\' '
+                case _:
+                    result = f'#{token.lineno} {token.type}'
+            output_lines.append(result)
+            prev_type = token.type
+            prev_line = token.lineno
+        return output_lines
 

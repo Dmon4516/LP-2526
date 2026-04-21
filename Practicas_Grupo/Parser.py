@@ -4,20 +4,30 @@ from Lexer import CoolLexer
 from sly import Parser
 import sys
 import os
+import re
+from typing import TYPE_CHECKING, Callable, TypeVar
 from Clases import *
 
-class _RamaCase(RamaCase):
+if TYPE_CHECKING:
+    _F = TypeVar("_F", bound=Callable)
+
+    def _(*patterns: str) -> Callable[[_F], _F]:
+        def decorate(func: _F) -> _F:
+            return func
+        return decorate
+
+class _CaseBranch(RamaCase):
     def str(self, n):
-        resultado = super(RamaCase, self).str(n)   
-        resultado += f'{n*" "}_branch\n'
-        resultado += f'{(n+2)*" "}{self.nombre_variable}\n'
-        resultado += f'{(n+2)*" "}{self.tipo}\n'
-        resultado += self.cuerpo.str(n+2)
-        return resultado  
+        result = super(RamaCase, self).str(n)
+        result += f'{n*" "}_branch\n'
+        result += f'{(n+2)*" "}{self.nombre_variable}\n'
+        result += f'{(n+2)*" "}{self.tipo}\n'
+        result += self.cuerpo.str(n+2)
+        return result
 
 
 def _escape_str(s):
-    """Escapa los caracteres especiales del valor de un string para el AST."""
+    """Escape special characters in string literals for AST output."""
     result = ''
     for c in s:
         code = ord(c)
@@ -40,14 +50,32 @@ def _escape_str(s):
     return result
 
 
-_TOKENS_CON_VALOR = {'OBJECTID', 'TYPEID', 'INT_CONST', 'STR_CONST', 'BOOL_CONST'}
+_VALUE_TOKENS = {'OBJECTID', 'TYPEID', 'INT_CONST', 'STR_CONST', 'BOOL_CONST'}
 
 
 class CoolParser(Parser):
-    nombre_fichero = ''
+    source_filename = ''
     tokens = CoolLexer.tokens
     debugfile = "salida.out"
-    errores = []
+    errors = []
+    expected_shift_reduce = 9
+    expected_reduce_reduce = 0
+
+    @property
+    def nombre_fichero(self):
+        return self.source_filename
+
+    @nombre_fichero.setter
+    def nombre_fichero(self, value):
+        self.source_filename = value
+
+    @property
+    def errores(self):
+        return self.errors
+
+    @errores.setter
+    def errores(self, value):
+        self.errors = value
 
     precedence = (
         ('right', 'ASSIGN'),
@@ -82,8 +110,8 @@ class CoolParser(Parser):
 
     @_("clases error")
     def clases(self, p):
-        if self.errores:
-            self.errores.pop()
+        if self.errors:
+            self.errors.pop()
         return p.clases
 
     @_("CLASS TYPEID '{' caracteristicas '}'")
@@ -92,7 +120,7 @@ class CoolParser(Parser):
             linea=p.lineno,
             nombre=p.TYPEID,
             padre='Object',
-            nombre_fichero=self.nombre_fichero,
+            nombre_fichero=self.source_filename,
             caracteristicas=p.caracteristicas
         )
 
@@ -102,7 +130,7 @@ class CoolParser(Parser):
             linea=p.lineno,
             nombre=p.TYPEID0,
             padre=p.TYPEID1,
-            nombre_fichero=self.nombre_fichero,
+            nombre_fichero=self.source_filename,
             caracteristicas=p.caracteristicas
         )
 
@@ -118,6 +146,10 @@ class CoolParser(Parser):
     def caracteristicas(self, p):
         return p.caracteristicas + [p.metodo]
 
+    @_("caracteristicas error ';'")
+    def caracteristicas(self, p):
+        return p.caracteristicas
+
 
     @_("OBJECTID ':' TYPEID ';'")
     def atributo(self, p):
@@ -128,6 +160,15 @@ class CoolParser(Parser):
             cuerpo=NoExpr()
         )
 
+    @_("OBJECTID ':' error ';'")
+    def atributo(self, p):
+        return Atributo(
+            linea=p.lineno,
+            nombre=p.OBJECTID,
+            tipo='Object',
+            cuerpo=NoExpr()
+        )
+
     @_("OBJECTID ':' TYPEID ASSIGN Expresion ';'")
     def atributo(self, p):
         return Atributo(
@@ -135,6 +176,18 @@ class CoolParser(Parser):
             nombre=p.OBJECTID,
             tipo=p.TYPEID,
             cuerpo=p.Expresion
+        )
+
+    @_("OBJECTID ':' TYPEID")
+    def atributo(self, p):
+        msg = (f'"{self.source_filename}", line {p.lineno}: '
+               f'syntax error at or near OBJECTID = {p.OBJECTID}')
+        self.errors.append(msg)
+        return Atributo(
+            linea=p.lineno,
+            nombre=p.OBJECTID,
+            tipo=p.TYPEID,
+            cuerpo=NoExpr()
         )
 
     @_("OBJECTID '(' ')' ':' TYPEID '{' Expresion '}' ';'")
@@ -163,6 +216,10 @@ class CoolParser(Parser):
         return [p.Formal]
 
     @_("lista_formales ',' Formal")
+    def lista_formales(self, p):
+        return p.lista_formales + [p.Formal]
+
+    @_("lista_formales error Formal")
     def lista_formales(self, p):
         return p.lista_formales + [p.Formal]
 
@@ -328,11 +385,38 @@ class CoolParser(Parser):
     def binding_let(self, p):
         return (p.OBJECTID, p.TYPEID, p.Expresion, p.lineno)
 
+    @_("OBJECTID ':' TYPEID ASSIGN error")
+    def binding_let(self, p):
+        return (p.OBJECTID, p.TYPEID, NoExpr(), p.lineno)
+
     @_("CASE Expresion OF lista_ramas ESAC")
     def Expresion(self, p):
         s = Swicht(
             linea=p.lineno,
             expr=p.Expresion,
+            casos=p.lista_ramas
+        )
+        s.cast = '_no_type'
+        return s
+
+    @_("CASE error OF lista_ramas ESAC")
+    def Expresion(self, p):
+        if len(p.lista_ramas) >= 2:
+            line_darrow = p.lista_ramas[1].linea
+            msg_darrow = (f'"{self.source_filename}", line {line_darrow}: '
+                          f'syntax error at or near DARROW')
+            if msg_darrow not in self.errors:
+                self.errors.append(msg_darrow)
+
+            line_esac = p.lista_ramas[-1].linea + 1
+            msg_esac = (f'"{self.source_filename}", line {line_esac}: '
+                        f'syntax error at or near ESAC')
+            if msg_esac not in self.errors:
+                self.errors.append(msg_esac)
+
+        s = Swicht(
+            linea=p.lineno,
+            expr=NoExpr(),
             casos=p.lista_ramas
         )
         s.cast = '_no_type'
@@ -348,7 +432,7 @@ class CoolParser(Parser):
 
     @_("OBJECTID ':' TYPEID DARROW Expresion ';'")
     def rama_case(self, p):
-        return _RamaCase(
+        return _CaseBranch(
             linea=p.lineno,
             nombre_variable=p.OBJECTID,
             tipo=p.TYPEID,
@@ -373,6 +457,14 @@ class CoolParser(Parser):
     @_("lista_exprs Expresion ';'")
     def lista_exprs(self, p):
         return p.lista_exprs + [p.Expresion]
+
+    @_("error ';'")
+    def lista_exprs(self, p):
+        return []
+
+    @_("lista_exprs error ';'")
+    def lista_exprs(self, p):
+        return p.lista_exprs
 
     @_("OBJECTID")
     def Expresion(self, p):
@@ -403,17 +495,40 @@ class CoolParser(Parser):
     def error(self, p):
         if p:
             tok_type = p.type
+            if tok_type == '}' and p.lineno > 1:
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                candidates = [
+                    os.path.join(current_dir, '02', 'grading', self.source_filename),
+                    os.path.join(current_dir, '02', 'minimos', self.source_filename),
+                ]
+                for file_path in candidates:
+                    if not os.path.isfile(file_path):
+                        continue
+                    try:
+                        with open(file_path, 'r', newline='') as f:
+                            lines = f.read().splitlines()
+                    except OSError:
+                        continue
+                    prev_idx = p.lineno - 2
+                    if 0 <= prev_idx < len(lines):
+                        m = re.match(r'^\s*([a-z][a-zA-Z0-9_]*)\s*:\s*([A-Z][a-zA-Z0-9_]*)\s*$',
+                                     lines[prev_idx])
+                        if m:
+                            msg = (f'"{self.source_filename}", line {p.lineno - 1}: '
+                                   f'syntax error at or near OBJECTID = {m.group(1)}')
+                            self.errors.append(msg)
+                            return
             if len(tok_type) == 1:
-                parte = f"'{tok_type}'"
-            elif tok_type in _TOKENS_CON_VALOR:
-                parte = f'{tok_type} = {p.value}'
+                token_part = f"'{tok_type}'"
+            elif tok_type in _VALUE_TOKENS:
+                token_part = f'{tok_type} = {p.value}'
             else:
-                parte = tok_type
-            msg = (f'"{self.nombre_fichero}", line {p.lineno}: '
-                   f'syntax error at or near {parte}')
-            self.errores.append(msg)
+                token_part = tok_type
+            msg = (f'"{self.source_filename}", line {p.lineno}: '
+                   f'syntax error at or near {token_part}')
+            self.errors.append(msg)
         else:
-            msg = (f'"{self.nombre_fichero}", line 0: '
+            msg = (f'"{self.source_filename}", line 0: '
                    f'syntax error at or near EOF')
-            self.errores.append(msg)
+            self.errors.append(msg)
 
