@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 class _CaseBranch(RamaCase):
     def str(self, n):
-        result = super(RamaCase, self).str(n)
+        result = super().str(n)
         result += f'{n*" "}_branch\n'
         result += f'{(n+2)*" "}{self.nombre_variable}\n'
         result += f'{(n+2)*" "}{self.tipo}\n'

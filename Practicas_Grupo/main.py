@@ -71,7 +71,8 @@ if True:
             g.close()
             j = parser.parse(lexer.tokenize(entrada))
             try:
-                j.Tipo()
+		if PRACTICA != '03' and j:
+                	j.Tipo()
                 if j and not parser.errores:
                     resultado = '\n'.join([c for c in j.str(0).split('\n')
                                            if c and '#' not in c])
