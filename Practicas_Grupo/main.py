@@ -13,11 +13,16 @@ from Lexer import *
 from Clases import *
 # Parser builds its grammar at import time; only import it when needed (práctica 02/03)
 
-PRACTICA = "02" # Practica que hay que evaluar
+PRACTICA = "03" # Practica que hay que evaluar
 DEBUG = True   # Decir si se lanzan mensajes de debug
 NUMLINEAS = 3   # Numero de lineas que se muestran antes y después de la no coincidencia
 sys.path.append(DIRECTORIO)
-DIR = os.path.join(DIRECTORIO, PRACTICA, 'minimos')
+
+if PRACTICA == '03':
+    DIR = os.path.join(DIRECTORIO, PRACTICA, 'grading')
+else:    
+    DIR = os.path.join(DIRECTORIO, PRACTICA, 'minimo')
+
 FICHEROS = os.listdir(DIR)
 TESTS = [fich for fich in FICHEROS
          if os.path.isfile(os.path.join(DIR, fich)) and
