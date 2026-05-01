@@ -13,7 +13,7 @@ from Lexer import *
 from Clases import *
 # Parser builds its grammar at import time; only import it when needed (práctica 02/03)
 
-PRACTICA = "01" # Practica que hay que evaluar
+PRACTICA = "02" # Practica que hay que evaluar
 DEBUG = True   # Decir si se lanzan mensajes de debug
 NUMLINEAS = 3   # Numero de lineas que se muestran antes y después de la no coincidencia
 sys.path.append(DIRECTORIO)
@@ -71,7 +71,7 @@ if True:
             g.close()
             j = parser.parse(lexer.tokenize(entrada))
             try:
-                if PRACTICA != '03' and j:
+                if PRACTICA == '03' and j:
                     j.Tipo()
 
                 if j and not parser.errores:
@@ -87,7 +87,7 @@ if True:
                     nuestro = [linea for linea in resultado.split('\n') if linea]
                     bien = [linea for linea in bien.split('\n') if linea]
                     linea = 0
-                    while nuestro[linea:linea+NUMLINEAS] == bien[linea:linea+NUMLINEAS]:
+                    while linea < min(len(nuestro), len(bien)) and nuestro[linea:linea+NUMLINEAS] == bien[linea:linea+NUMLINEAS]:
                         linea += 1
                     print('\n'.join(nuestro[linea:linea+NUMLINEAS]))
                     print('\n'.join(bien[linea:linea+NUMLINEAS]))

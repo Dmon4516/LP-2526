@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 class _CaseBranch(RamaCase):
     def str(self, n):
-        result = super().str(n)
+        result = Nodo.str(self, n)
         result += f'{n*" "}_branch\n'
         result += f'{(n+2)*" "}{self.nombre_variable}\n'
         result += f'{(n+2)*" "}{self.tipo}\n'
@@ -432,12 +432,14 @@ class CoolParser(Parser):
 
     @_("OBJECTID ':' TYPEID DARROW Expresion ';'")
     def rama_case(self, p):
-        return _CaseBranch(
+        branch = _CaseBranch(
             linea=p.lineno,
             nombre_variable=p.OBJECTID,
             tipo=p.TYPEID,
             cuerpo=p.Expresion
         )
+        branch.cast = '_no_type'
+        return branch
 
     @_("NEW TYPEID")
     def Expresion(self, p):
