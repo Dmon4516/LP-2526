@@ -10,7 +10,7 @@ sys.path.append(DIRECTORIO)
 from Lexer import *
 from Clases import *
 
-PRACTICAS = ("01", "02", "03")  
+PRACTICAS = ("01", "02", "03", "04")  
 DEBUG = False   
 NUMLINEAS = 3   
 sys.path.append(DIRECTORIO)
@@ -22,6 +22,8 @@ def subdirectorios_practica(practica):
         return ('grading', 'minimos', 'minimo')
     if practica == '03':
         return ('grading', 'minimos', 'minimo')
+    if practica == '04':
+        return ('grading', 'minimos')
     return ()
 
 
@@ -73,22 +75,28 @@ for PRACTICA in PRACTICAS:
                         g.write(resultado.strip())
                         f.close()
                         g.close()
-            elif PRACTICA in ('02', '03'):
+            elif PRACTICA in ('02', '03', '04'):
                 from Parser import CoolParser
 
                 parser = CoolParser()
                 parser.nombre_fichero = fich
                 parser.errores = []
-                bien = ''.join([c for c in g.readlines() if c and '#' not in c])
+                if PRACTICA in ('02', '03'):
+                    bien = ''.join([c for c in g.readlines() if c and '#' not in c])
+                else:
+                    bien = g.read()
                 g.close()
                 j = parser.parse(lexer.tokenize(entrada))
                 try:
-                    if PRACTICA == '03' and j:
+                    if PRACTICA in ('03', '04') and j:
                         j.Tipo()
 
                     if j and not parser.errores:
-                        if PRACTICA == '03':
-                            resultado = interpretar_programa(j, fich, DIR).rstrip('\n')
+                        if PRACTICA in ('03', '04'):
+                            try:
+                                resultado = interpretar_programa(j, fich, DIR).rstrip('\n')
+                            except Exception as exec_error:
+                                resultado = str(exec_error).rstrip('\n')
                         else:
                             resultado = '\n'.join([c for c in j.str(0).split('\n')
                                                    if c and '#' not in c])

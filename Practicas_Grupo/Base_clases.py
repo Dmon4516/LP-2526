@@ -1,5 +1,15 @@
 from copy import deepcopy
 
+_OUTPUT_BUFFER = []
+
+
+def clear_output_buffer():
+    _OUTPUT_BUFFER.clear()
+
+
+def get_output_buffer_text():
+    return ''.join(_OUTPUT_BUFFER)
+
 class Objeto:
     def abort(self):
         exit()
@@ -18,7 +28,10 @@ class Entero(Objeto):
 
 class IO(Objeto):
     def out_string(self, s):
-        print( "") # ¿Que habra que poner?
+        _OUTPUT_BUFFER.append(str(s))
+        return self
 
     def out_int(self, s):
-        print("") # ¿Que habra que poner?
+        _OUTPUT_BUFFER.append(str(s))
+        return self
+
